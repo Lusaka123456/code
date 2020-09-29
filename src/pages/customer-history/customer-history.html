@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"customer_histtory" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+
+    <div *ngIf="requestList.length>0">
+        <ion-grid class="list card animated fadeInUp">
+            <div *ngFor="let item of requestList" class="ion-padding">
+                <div class="request-list">
+                    <ion-row>
+                        <ion-col col-6>
+                            {{item.vehicle_type}}
+                        </ion-col>
+                        <ion-col col-6 *ngIf="global.lang=='ar'">
+                            {{item.ar_name}}
+                        </ion-col>
+                        <ion-col col-6 *ngIf="global.lang=='en'">
+                            {{item.en_name}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>
+                            {{item.request_date}}
+                        </ion-col>
+                        <ion-col col-6 *ngIf="item.request_time!=null">
+                            {{item.request_time}}
+                        </ion-col>
+                        <ion-col col-6 *ngIf="item.request_time==null">
+                            {{"not_set_request_time" | translate}}
+                        </ion-col>
+                        <ion-col col-12 *ngIf="item.action=='new' || item.action=='accept'" text-center>
+                            <input type="button" (click)="cancel(item.car_id, item.workshop_id, item.request_id)" class="btn-main" value="{{'cancel' | translate}}" />
+                        </ion-col>
+                        <ion-col col-12 *ngIf="item.action=='reject'" text-center>
+                            <label class="reject">{{'reject' | translate}}</label>
+                        </ion-col>
+                        <ion-col col-12 *ngIf="item.action=='finish'" text-center>
+                            <label class="finish">{{'finish' | translate}}</label>
+                        </ion-col>
+                        <ion-col col-12 *ngIf="item.action=='cancel'" text-center>
+                            <label class="reject">{{'cancel' | translate}}</label>
+                        </ion-col>
+                    </ion-row>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </ion-grid>
+    </div>
+
+
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

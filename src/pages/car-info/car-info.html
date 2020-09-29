@@ -1,0 +1,174 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"appointment" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="viewData">
+        <ion-grid class="list card animated fadeInUp">
+            <ion-row>
+                <ion-col size="4" text-center (click)="openCommentsPage()" class="icon-car">
+                    <i class="fas fa-comment-alt"></i>
+                </ion-col>
+                <ion-col size="4" text-center>
+                    <img *ngIf="userInfo.image!=null" src="{{global.imagePath + userInfo.image}}" class="userImage" />
+                    <img *ngIf="userInfo.image==null" src="../../assets/imgs/user.png" class="userImage" />
+                </ion-col>
+                <ion-col size="4" text-center class="icon-car">
+                    <a href="tel://{{userInfo.mobile}}">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                </ion-col>
+            </ion-row>
+            <!-- <ion-row>
+                <ion-col size="12" text-center *ngIf="carInfo.image!=null"><img src="{{global.imagePath + carInfo.image}}" /></ion-col>
+                <ion-col size="12" text-center *ngIf="carInfo.image==null"><img src="../../assets/imgs/car.png" /></ion-col>
+            </ion-row> -->
+            <ion-row>
+                <ion-col col-8 class="big-text">{{carInfo.brand}} {{carInfo.car_model}}</ion-col>
+                <ion-col col-2 (click)="changeView('history')"><i class="fas fa-history big-text "></i></ion-col>
+                <ion-col col-2 (click)="changeView('info')"><i class="fas fa-info big-text "></i></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12" text-center *ngIf="history">
+                    <div *ngIf="carHistory.length > 0">
+                        <div *ngFor="let item of carHistory">
+                            <ion-row class="botder-bottom">
+                                <ion-col col-12 text-center>{{item.note}} - {{item.issue_date}}</ion-col>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div *ngIf="carHistory.length <= 0">
+                        <ion-row class="botder-bottom">
+                            <ion-col col-12 text-center>{{"no_data_found" | translate}}</ion-col>
+                        </ion-row>
+                    </div>
+                </ion-col>
+                <ion-col size="12" text-center *ngIf="information">
+                    <ion-row>
+                        <ion-col col-6>{{"model" | translate}}:</ion-col>
+                        <ion-col col-6>{{carInfo.model}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>{{"origin" | translate}}:</ion-col>
+                        <ion-col col-6>{{carInfo.origin}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>{{"vehicle_type" | translate}}:</ion-col>
+                        <ion-col col-6>{{carInfo.car_name}}</ion-col>
+                    </ion-row>
+                    <ion-row class="white-bg ">
+                        <ion-col col-12 class="td-plateBox">
+                            <div class="plateBox">{{carInfo.plate_number}}</div>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row *ngIf="notiInfo.status=='new'">
+                <ion-col size="6" text-center>
+                    <input type="button" class="btn-main" value="{{'accept' | translate}}" (click)="accept()" />
+                </ion-col>
+                <ion-col size="6" text-center>
+                    <input type="button" class="btn-main" value="{{'reject' | translate}}" (click)="reject()" />
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
+
+<div class="full-bg" *ngIf="fullBG">
+    <div class="faceBox list card animated fadeInUp">
+        <div [ngClass]="{'otherAlign-left': global.lang=='ar', 'otherAlign-right': global.lang=='en'}" (click)="closeFaseBox()"><i class="far fa-times-circle close"></i></div>
+        <div class="scroll-div">
+            <ion-grid>
+                <div class="clear-mid"></div>
+                <form padding [formGroup]="form">
+                    <ion-row>
+                        <ion-col col-4>{{'request_date' | translate}}</ion-col>
+                        <ion-col col-4 text-center>
+                            <input type="date" placeholder="{{'request_date' | translate}}" formControlName="request_date" (keyup.enter)="save()" />
+                        </ion-col>
+                        <div class="validation-errors">
+                            <ng-container *ngFor="let validation of validation_messages.request_date">
+                                <div class="error-message" *ngIf="form.get('request_date').hasError(validation.type) && (form.get('request_date').dirty || form.get('request_date').touched)">
+                                    {{ validation.message | translate}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <ion-col col-4></ion-col>
+                    </ion-row>
+                    <div class="clear"></div>
+                    <ion-row>
+                        <ion-col col-4>{{'request_time' | translate}}</ion-col>
+                        <ion-col col-4 text-center>
+                            <input type="time" placeholder="{{'end_at' | translate}}" formControlName="request_time" (keyup.enter)="save()" />
+                        </ion-col>
+                        <div class="validation-errors">
+                            <ng-container *ngFor="let validation of validation_messages.request_time">
+                                <div class="error-message" *ngIf="form.get('request_time').hasError(validation.type) && (form.get('request_time').dirty || form.get('request_time').touched)">
+                                    {{ validation.message | translate}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <ion-col col-4></ion-col>
+                    </ion-row>
+                    <div class="clear"></div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10 text-center>
+                            <input type="button" class="btn-main" value="{{'save' | translate}}" (click)="save()" />
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                </form>
+            </ion-grid>
+        </div>
+        <div class="clear-mid"></div>
+    </div>
+</div>
+
+<div class="full-bg" *ngIf="viewUserComment">
+    <div class="faceBox list card animated fadeInUp">
+        <div [ngClass]="{'otherAlign-left': global.lang=='ar', 'otherAlign-right': global.lang=='en'}" (click)="closeFaseBoxComment()"><i class="far fa-times-circle close"></i></div>
+        <div class="scroll-div">
+            <ion-grid *ngIf="userComment.length>0">
+                <ion-col col-12>
+                    <div class="comments" *ngFor="let item of userComment">
+                        <ion-row>
+                            <ion-col col-4 class="profile-logo">
+                                <img src="{{global.imagePath + item.logo}}" class="smal-profile-logo" />
+                            </ion-col>
+                            <ion-col col-8>
+                                <label>{{item.feedback}}</label>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <label *ngIf=" global.lang=='ar'" class="label-date">{{item.ar_name}}</label>
+                                <label *ngIf=" global.lang=='en'" class="label-date">{{item.en_name}}</label>
+                            </ion-col>
+                            <ion-col col-4></ion-col>
+                            <ion-col col-4>
+                                <label class="label-date">{{item.issue_date}}</label>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </ion-col>
+            </ion-grid>
+        </div>
+        <div class="clear-mid"></div>
+    </div>
+</div>

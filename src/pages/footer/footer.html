@@ -1,0 +1,73 @@
+<div class="row footer-menu">
+    <div class="col-md-3 footer-btn" (click)="openHomePage()">
+        <div class=" border-3">
+            <img *ngIf="!viewHome" src="../../assets/icon/home-gray.png">
+            <img *ngIf="viewHome" src="../../assets/icon/home-color.png">
+            <br /><label>{{"homepage" | translate}}</label>
+        </div>
+    </div>
+
+    <div *ngIf="viewType==0" class="col-md-3 footer-btn" (click)="openCategory()">
+        <div class=" border-3">
+            <img *ngIf="!viewSearch" src="../../assets/icon/search-gray.png">
+            <img *ngIf="viewSearch" src="../../assets/icon/search-color.png">
+            <br /><label>{{"explore" | translate}}</label>
+        </div>
+    </div>
+    <div *ngIf="viewType==1" class="col-md-3 footer-btn" (click)="openCategory()">
+        <div class=" border-3">
+            <img *ngIf="!viewSearch" src="../../assets/icon/search-gray.png">
+            <img *ngIf="viewSearch" src="../../assets/icon/search-color.png">
+            <br /><label>{{"explore" | translate}}</label>
+        </div>
+    </div>
+    <div *ngIf="viewType==2" class="col-md-3 footer-btn">
+        <div class=" border-3">
+            <img *ngIf="!viewSearch" src="../../assets/icon/search-gray.png">
+            <img *ngIf="viewSearch" src="../../assets/icon/search-color.png">
+            <br /><label>{{"explore" | translate}}</label>
+        </div>
+    </div>
+
+    <div *ngIf="viewType==0" class="col-md-3 footer-btn">
+        <div class=" border-3">
+            <img src="../../assets/icon/saved-gray.png">
+            <br /><label>{{"saved" | translate}}</label>
+        </div>
+    </div>
+    <div *ngIf="viewType==1" class="col-md-3 footer-btn" (click)="openFavCalender()">
+        <div class=" border-3">
+            <img *ngIf="!viewSaved" src="../../assets/icon/saved-gray.png">
+            <img *ngIf="viewSaved" src="../../assets/icon/saved-color.png">
+            <br /><label>{{"saved" | translate}}</label>
+        </div>
+    </div>
+    <div *ngIf="viewType==2" class="col-md-3 footer-btn" (click)="openFavCalender()">
+        <div class=" border-3">
+            <img *ngIf="!viewCalendar" src="../../assets/icon/calendar-gray.png">
+            <img *ngIf="viewCalendar" src="../../assets/icon/calendar-color.png">
+            <br /><label>{{"calendar" | translate}}</label>
+        </div>
+    </div>
+
+    <div *ngIf="viewType==0" class="col-md-3 footer-btn">
+        <div class=" border-3">
+            <img src="../../assets/icon/car-gray.png">
+            <br /><label>{{"my_cars" | translate}}</label>
+        </div>
+    </div>
+    <div *ngIf="viewType==1" class="col-md-3 footer-btn" (click)="openCarGarage()">
+        <div class=" border-3">
+            <img *ngIf="!viewCar" src="../../assets/icon/car-gray.png">
+            <img *ngIf="viewCar" src="../../assets/icon/car-color.png">
+            <br /><label>{{"my_cars" | translate}}</label>
+        </div>
+    </div>
+    <div *ngIf="viewType==2" class="col-md-3 footer-btn" (click)="openCarGarage()">
+        <div class=" border-3">
+            <img *ngIf="!viewGarage" src="../../assets/icon/garage-gray.png">
+            <img *ngIf="viewGarage" src="../../assets/icon/garage-color.png">
+            <br /><label>{{"garage" | translate}}</label>
+        </div>
+    </div>
+</div>

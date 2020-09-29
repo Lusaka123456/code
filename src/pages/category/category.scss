@@ -1,0 +1,22 @@
+page-category {
+    img {
+        width: auto;
+        height: 50px;
+    }
+    .cat-box {
+        padding: 5px 5px 5px 5px;
+        border: dashed 2px #dc713d;
+        border-radius: 10px;
+        height: 70px;
+    }
+    .box-img {
+        width: 30%;
+        float: right;
+    }
+    .cat-lable {
+        width: 70%;
+        float: left;
+        line-height: 50px;
+        padding-left: 30px;
+    }
+}

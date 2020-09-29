@@ -1,0 +1,24 @@
+<ion-content>
+    <div class="content">
+        <div class="content-border">
+            <div class="clear-big"></div>
+            <div class="view-reg-type list card animated fadeInUp" (click)="openCarScan()">
+                <div class="reg-img"><img src="../../assets/imgs/car_scan.png"></div>
+                <div class="reg-lable">{{"add_car_scan" | translate}}</div>
+            </div>
+            <div class="clear-big"></div>
+            <div class="view-reg-type list card animated fadeInDown" (click)="openCarManual()">
+                <div class="reg-img"><img src="../../assets/imgs/car_manual.png"></div>
+                <div class="reg-lable">{{"add_car_manual" | translate}}</div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<div class="select-upload list card animated fadeInUp" *ngIf="showUpload">
+    <div class="select-option">
+        <div (click)="openCamera()">{{"camera" | translate}}</div>
+        <div (click)="openGallery()">{{"gallary" | translate}}</div>
+    </div>
+    <div class="clear"></div>
+    <div class="select-option" (click)="closeUpload()">{{"close" | translate}}</div>
+</div>

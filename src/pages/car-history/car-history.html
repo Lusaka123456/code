@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"car_history" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+    <div>
+        <ion-grid class="list card animated fadeInUp">
+            <div class="box">
+                <ion-row>
+                    <ion-col size="12" text-center><img src="{{carImage}}" />
+                    </ion-col>
+                </ion-row>
+                <ion-row class="border-bottom-orange">
+                    <ion-col col-8 class="big-text">{{vehicleType}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12 *ngFor="let item of historyList" class="border-bottom">
+                        <ion-row>
+                            <ion-col col-8><b>{{item.en_name}}</b></ion-col>
+                            <ion-col col-4 class="text-orange"></ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-8>{{item.note}}</ion-col>
+                            <ion-col col-4>{{item.date_out}}</ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </ion-grid>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

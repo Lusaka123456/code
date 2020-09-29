@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-10 text-left class="header-label">
+                {{"change_password" | translate}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+    <form padding [formGroup]="form">
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10 text-center>
+                <input type="password" placeholder="{{'old_password' | translate}}" formControlName="old_password" />
+            </ion-col>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.old_password">
+                    <div class="error-message" *ngIf="form.get('old_password').hasError(validation.type) && (form.get('old_password').dirty || form.get('old_password').touched)">
+                        {{ validation.message | translate}}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-col col-1></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10 text-center>
+                <input type="password" placeholder="{{'new_password' | translate}}" formControlName="password" />
+            </ion-col>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.password">
+                    <div class="error-message" *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+                        {{ validation.message | translate}}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-col col-1></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10 text-center>
+                <input type="password" placeholder="{{'con_password' | translate}}" formControlName="con_password" />
+            </ion-col>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.con_password">
+                    <div class="error-message" *ngIf="form.get('con_password').hasError(validation.type) && (form.get('con_password').dirty || form.get('con_password').touched)">
+                        {{ validation.message | translate}}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-col col-1></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10 text-center>
+                <input type="button" class="btn-main" value="{{'save' | translate}}" (click)="save()" />
+            </ion-col>
+            <ion-col col-1></ion-col>
+        </ion-row>
+    </form>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

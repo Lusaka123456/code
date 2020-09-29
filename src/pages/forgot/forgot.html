@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-10 text-left class="header-label">
+                {{"forgot_title" | translate}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+    <div class="content">
+        <div class="content-border">
+            <div class="clear"></div>
+            <div class="view-reg-type list card animated fadeInUp" (click)="openRestPass('email')">
+                <div class="reg-img"><img src="../../assets/imgs/reset_email.png"></div>
+                <div class="reg-lable">{{"forgot_email" | translate}}</div>
+            </div>
+            <div class="clear-mid"></div>
+            <div class="view-reg-type list card animated fadeInDown" (click)="openRestPass('mobile')">
+                <div class="reg-img"><img src="../../assets/imgs/reset_mobile.png"></div>
+                <div class="reg-lable">{{"forgot_mobile" | translate}}</div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

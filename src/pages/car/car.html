@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"my_cars" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="carList.length>0">
+        <ion-grid class="list card animated fadeInUp">
+            <div *ngFor="let item of carList">
+                <div class="box">
+                    <ion-row (click)="uploadImg(item.id)">
+                        <ion-col size="12" text-center *ngIf="item.image!=null"><img src="{{global.imagePath + item.image}}" /></ion-col>
+                        <ion-col size="12" text-center *ngIf="item.image==null"><img src="../../assets/imgs/car.png" />
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8 class="big-text">{{item.brand}} {{item.car_model}}</ion-col>
+                        <ion-col col-2 (click)="carHistory(item.id)"><i class="fas fa-history big-text "></i></ion-col>
+                        <ion-col col-2 (click)="viewDetails(item.id)"><i class="fas fa-info big-text "></i></ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12 [ngClass]="{ 'show': divId==item.id, 'hide': divId!=item.id} ">
+                            <table class="table table-striped ">
+                                <tbody>
+                                    <tr class="white-bg ">
+                                        <td>{{"model" | translate}}</td>
+                                        <td>{{item.model}}</td>
+                                    </tr>
+                                    <tr class="white-bg ">
+                                        <td>{{"origin" | translate}}</td>
+                                        <td>{{item.origin}}</td>
+                                    </tr>
+                                    <tr class="white-bg ">
+                                        <td colspan="2" class="td-plateBox">
+                                            <div class="plateBox">{{item.plate_number}}</div>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td colspan="2 " text-center>
+                                            <button type="button " class="btn btn-danger btn-main" (click)="deletCar(item.id)"><i class="fas fa-trash-alt "></i> {{"delete" | translate}}</button>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </ion-col>
+                    </ion-row>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </ion-grid>
+    </div>
+</ion-content>
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
+
+<div class="add-btn list card animated fadeIn " (click)="openAddCar() ">
+    <img src="../../assets/imgs/car_add.png " />
+</div>
+
+<div class="select-upload list card animated fadeInUp" *ngIf="showUpload">
+    <div class="select-option">
+        <div (click)="openCamera()">{{"camera" | translate}}</div>
+        <div (click)="openGallery()">{{"gallary" | translate}}</div>
+    </div>
+    <div class="clear"></div>
+    <div class="select-option" (click)="closeUpload()">{{"close" | translate}}</div>
+</div>
