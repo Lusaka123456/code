@@ -1,0 +1,7 @@
+{
+  "name": "MyKaraj",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

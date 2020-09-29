@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "101925336628",
+    "firebase_url": "https://karaj-62d80.firebaseio.com",
+    "project_id": "karaj-62d80",
+    "storage_bucket": "karaj-62d80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101925336628:android:81c9c431f5c81a7eb7fc61",
+        "android_client_info": {
+          "package_name": "ionic.Mykaraj.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101925336628-bk93af3rj43moihbnnproj2s98t4outg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7KYNH1z9dFtTce8e6E3ASlwgcg5pVDcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101925336628-bk93af3rj43moihbnnproj2s98t4outg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "101925336628-qr609bcsm21kfftaiumq19g2tf3lhu3k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mykraj"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
