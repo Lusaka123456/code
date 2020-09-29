@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"about_us" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid class="list card animated fadeInRight">
+        <ion-row>
+            <ion-col col-12 text-center>
+                <img class="logo" src="../../assets/imgs/full-logo.png" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div class="clear"></div>
+    <div class="list card animated fadeInLeft">
+        <p *ngIf="global.lang=='en'">{{"about_us1" | translate}}</p>
+        <p *ngIf="global.lang=='ar'" class="arabic-text">{{"about_us1" | translate}}</p>
+        <p *ngIf="global.lang=='en'">{{"about_us2" | translate}}</p>
+        <p *ngIf="global.lang=='ar'" class="arabic-text">{{"about_us2" | translate}}</p>
+        <p *ngIf="global.lang=='en'">{{"about_us3" | translate}}</p>
+        <p *ngIf="global.lang=='ar'" class="arabic-text">{{"about_us3" | translate}}</p>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
