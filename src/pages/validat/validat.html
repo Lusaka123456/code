@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-10 text-left class="header-label header-small">
+                {{"validat_account" | translate}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+<ion-content>
+    <div class="clear-mid"></div>
+    <div *ngIf="sms=='Yes'">
+        <div text-center>
+            <i class="fas fa-sms very-big-text-60"></i>
+            <div class="normal-text">{{'valid_mobile' | translate}} {{registerType}}</div>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-4></ion-col>
+                    <ion-col col-4>
+                        <input type="number" [(ngModel)]="mobileCode" maxlength="4" minlength="4" class="bigInput" />
+                    </ion-col>
+                    <ion-col col-4></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12 text-center>
+                        <input type="button" class="btn-main" value="{{'valid' | translate}}" (click)="validatMobile()" />
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div class="clear"></div>
+        <div class="very-big-text-60" text-center>{{"or" | translate}}</div>
+        <div class="clear"></div>
+    </div>
+    <div text-center>
+        <i class="fas fa-envelope very-big-text-60"></i>
+        <div class="normal-text">{{'valid_email' | translate}} {{registerType}}</div>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-2></ion-col>
+                <ion-col col-8 text-center>
+                    <input type="number" maxlength="1" #emailCode1 class="valiate-input" (keypress)="next($event, emailCode2)" />
+                    <input type="number" maxlength="1" #emailCode2 class="valiate-input" (keypress)="next($event, emailCode3)" />
+                    <input type="number" maxlength="1" #emailCode3 class="valiate-input" (keypress)="next($event, emailCode4)" />
+                    <input type="number" maxlength="1" #emailCode4 class="valiate-input" (keypress)="next($event, 'finish')" />
+                </ion-col>
+                <ion-col col-2></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 text-center>
+                    <input type="button" class="btn-main" value="{{'valid' | translate}}" (click)="validatEmail()" />
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 text-center>
+                    <input type="button" class="btn-main-full" value="{{'resend-code' | translate}}" (click)="resendCode()" />
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <!-- <div class="clear-big"></div>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 text-center>
+                <input type="button" class="btn-main btn-full" value="{{'continue' | translate}}" />
+            </ion-col>
+        </ion-row>
+    </ion-grid> -->
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

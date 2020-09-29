@@ -1,0 +1,24 @@
+<div class="seaeh-filter list card animated fadeIn" [ngClass]="{'full-search-width': showInput}">
+    <div class="search-btn" (click)="openSearch()">
+        <i class="fa fa-search"></i>
+    </div>
+    <div *ngIf="showInput" class="search-input">
+        <input class="search" type="text" placeholder="{{'search_gagare_name' | translate}}" [(ngModel)]="searchByName" (keypress)="search($event)"/>
+    </div>
+    <div *ngIf="showInput" class="filter-btn" (click)="openFilter()">
+        <i class="fa fa-filter"></i>
+    </div>
+</div>
+<div *ngIf="showFilte && showInput" class="filter-view">
+    <ion-list>
+        <ion-item (click)="searchWithFilter('name')">
+            <i class="fas fa-sort-alpha-down"></i> <label class="small-text">{{"by_name" | translate}}</label>
+        </ion-item>
+        <ion-item (click)="searchWithFilter('distance')">
+            <i class="fas fa-map-marked-alt"></i> <label class="small-text">{{"by_distance" | translate}}</label>
+        </ion-item>
+        <ion-item (click)="searchWithFilter('rate')">
+            <i class="fas fa-splotch"></i> <label class="small-text">{{"by_rate" | translate}}</label>
+        </ion-item>
+    </ion-list>
+</div>

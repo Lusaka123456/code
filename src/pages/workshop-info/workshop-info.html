@@ -1,0 +1,327 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"garage_details" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+<ion-content>
+
+    <form padding [formGroup]="form">
+        <div class="list card animated bounceInUp">
+            <ion-row (click)="uploadImg()">
+                <ion-col size="12" text-center *ngIf="garageInfo.logo!=null"><img src="{{global.imagePath + garageInfo.logo}}" /></ion-col>
+                <ion-col size="12" text-center *ngIf="garageInfo.logo==null"><img src="../../assets/imgs/car.png" /></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'arabic_name' | translate}}" formControlName="ar_name" [(ngModel)]="garageInfo.ar_name" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.ar_name">
+                        <div class="error-message" *ngIf="form.get('ar_name').hasError(validation.type) && (form.get('ar_name').dirty || form.get('ar_name').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'english_name' | translate}}" formControlName="en_name" [(ngModel)]="garageInfo.en_name" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.en_name">
+                        <div class="error-message" *ngIf="form.get('en_name').hasError(validation.type) && (form.get('en_name').dirty || form.get('en_name').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'ar_description' | translate}}" formControlName="ar_description" [(ngModel)]="garageInfo.ar_description" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.en_name">
+                        <div class="error-message" *ngIf="form.get('en_name').hasError(validation.type) && (form.get('en_name').dirty || form.get('en_name').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'en_description' | translate}}" formControlName="en_description" [(ngModel)]="garageInfo.en_description" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.en_description">
+                        <div class="error-message" *ngIf="form.get('en_description').hasError(validation.type) && (form.get('en_description').dirty || form.get('en_description').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <ion-select interface="action-sheet" (ionChange)="changeCity($event)" cancelText='{{"cancel" | translate}}' formControlName="country_id" [(ngModel)]="garageInfo.country_id">
+                        <ion-option value="" selected>{{'select_country' | translate}}</ion-option>
+                        <ion-option *ngFor="let item of countryList" value="{{item.id}}">
+                            <div *ngIf="global.lang=='ar'">{{item.ar_name}} </div>
+                            <div *ngIf="global.lang=='en'">{{item.en_name}} </div>
+                        </ion-option>
+                    </ion-select>
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.country_id">
+                        <div class="error-message" *ngIf="form.get('country_id').hasError(validation.type) && (form.get('country_id').dirty || form.get('country_id').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <ion-select interface="action-sheet" cancelText='{{"cancel" | translate}}' formControlName="city_id" [(ngModel)]="garageInfo.city_id">
+                        <ion-option value="" selected>{{'select_city' | translate}}</ion-option>
+                        <ion-option *ngFor="let item of cityList" value="{{item.id}}">
+                            <div *ngIf="global.lang=='ar'">{{item.ar_name}} </div>
+                            <div *ngIf="global.lang=='en'">{{item.en_name}} </div>
+                        </ion-option>
+                    </ion-select>
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.city_id">
+                        <div class="error-message" *ngIf="form.get('city_id').hasError(validation.type) && (form.get('city_id').dirty || form.get('city_id').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'arabic_address' | translate}}" formControlName="ar_address" [(ngModel)]="garageInfo.ar_address" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.ar_address">
+                        <div class="error-message" *ngIf="form.get('ar_address').hasError(validation.type) && (form.get('ar_address').dirty || form.get('ar_address').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'english_addess' | translate}}" formControlName="en_address" [(ngModel)]="garageInfo.en_address" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.en_address">
+                        <div class="error-message" *ngIf="form.get('en_address').hasError(validation.type) && (form.get('en_address').dirty || form.get('en_address').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'mobile' | translate}}" formControlName="mobile" [(ngModel)]="garageInfo.mobile" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.mobile">
+                        <div class="error-message" *ngIf="form.get('mobile').hasError(validation.type) && (form.get('mobile').dirty || form.get('mobile').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'whatsapp' | translate}}" formControlName="whatsapp" [(ngModel)]="garageInfo.whatsapp" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.whatsapp">
+                        <div class="error-message" *ngIf="form.get('whatsapp').hasError(validation.type) && (form.get('whatsapp').dirty || form.get('whatsapp').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'telephone' | translate}}" formControlName="telephone" [(ngModel)]="garageInfo.telephone" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.telephone">
+                        <div class="error-message" *ngIf="form.get('telephone').hasError(validation.type) && (form.get('telephone').dirty || form.get('telephone').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'email' | translate}}" formControlName="email" [(ngModel)]="garageInfo.email" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.email">
+                        <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'website' | translate}}" formControlName="website" [(ngModel)]="garageInfo.website" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.website">
+                        <div class="error-message" *ngIf="form.get('website').hasError(validation.type) && (form.get('website').dirty || form.get('website').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+
+            <div #map id="map"></div>
+
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <!-- <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <ion-select interface="action-sheet" (ionChange)="changeSubCategory($event)" cancelText='{{"cancel" | translate}}' formControlName="cat_id" [(ngModel)]="garageInfo.cat_id">
+                        <ion-option value="" selected>{{'select_category' | translate}}</ion-option>
+                        <ion-option *ngFor="let item of categoryList" value="{{item.id}}">
+                            <div *ngIf="global.lang=='ar'">{{item.ar_name}} </div>
+                            <div *ngIf="global.lang=='en'">{{item.en_name}} </div>
+                        </ion-option>
+                    </ion-select>
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.cat_id">
+                        <div class="error-message" *ngIf="form.get('cat_id').hasError(validation.type) && (form.get('cat_id').dirty || form.get('cat_id').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div> -->
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <label value="">{{'services' | translate}}</label>
+                    <ion-select interface="alert" multiple="true" okText='{{"okay" | translate}}' cancelText='{{"cancel" | translate}}' formControlName="sub_cat_id">
+                        <ion-option *ngFor="let item of categoryList" value="{{item.id}}">
+                            <div *ngIf="global.lang=='ar'">{{item.ar_name}} </div>
+                            <div *ngIf="global.lang=='en'">{{item.en_name}} </div>
+                        </ion-option>
+                    </ion-select>
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.sub_cat_id">
+                        <div class="error-message" *ngIf="form.get('sub_cat_id').hasError(validation.type) && (form.get('sub_cat_id').dirty || form.get('sub_cat_id').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-4>{{'start_at' | translate}}</ion-col>
+                <ion-col col-4 text-center>
+                    <input type="time" placeholder="{{'start_at' | translate}}" formControlName="start_from" [(ngModel)]="garageInfo.start_from" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.start_from">
+                        <div class="error-message" *ngIf="form.get('start_from').hasError(validation.type) && (form.get('start_from').dirty || form.get('start_from').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-4></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-4>{{'end_at' | translate}}</ion-col>
+                <ion-col col-4 text-center>
+                    <input type="time" placeholder="{{'end_at' | translate}}" formControlName="end_at" [(ngModel)]="garageInfo.end_at" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.end_at">
+                        <div class="error-message" *ngIf="form.get('end_at').hasError(validation.type) && (form.get('end_at').dirty || form.get('end_at').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-4></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="button" class="btn-main" value="{{'update' | translate}}" (click)="save()" />
+                </ion-col>
+                <ion-col col-1></ion-col>
+            </ion-row>
+        </div>
+    </form>
+
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
+
+<div class="select-upload list card animated fadeInUp" *ngIf="showUpload">
+    <div class="select-option">
+        <div (click)="openCamera()">{{"camera" | translate}}</div>
+        <div (click)="openGallery()">{{"gallary" | translate}}</div>
+    </div>
+    <div class="clear"></div>
+    <div class="select-option" (click)="closeUpload()">{{"close" | translate}}</div>
+</div>

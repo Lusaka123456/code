@@ -1,0 +1,31 @@
+page-new-calender {
+    .monthview-selected[_ngcontent-c1] {
+        background-color: #dc713d;
+        color: white;
+    }
+    .item-inner {
+        display: none !important;
+    }
+    .list-ios>.item-block:first-child {
+        border-bottom: none !important;
+    }
+    .monthview-current[_ngcontent-c1] {
+        background-color: #e29d7b;
+    }
+    .monthview-primary-with-event[_ngcontent-c1] {
+        background-color: #e29d7b;
+    }
+    .calendar-event-inner[_ngcontent-c0] {
+        background-color: #dc713d;
+    }
+    .small-img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    textarea.text-input {
+        display: block;
+        background: #ffffff;
+        border-radius: 10px;
+    }
+}

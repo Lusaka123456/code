@@ -1,0 +1,52 @@
+.para_div {
+    background-color: #e4a07e;
+    min-height: 1px !important;
+    height: 2px;
+}
+
+.info_link {
+    text-decoration: underline;
+    color: #e4a07e;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+}
+
+.noti_time {
+    font-size: 9px;
+    color: gray;
+    margin: auto;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.noti_word {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.noti_spot {
+    margin: auto;
+    margin-left: -15px;
+    margin-right: 6px;
+}
+
+.noti {
+    display: flex;
+}
+
+.noti_span {
+    font-size: 40px;
+    color: #e4a07e;
+    margin-left: -5px;
+}
+
+.yallow {
+    color: #ff9500 !important;
+}

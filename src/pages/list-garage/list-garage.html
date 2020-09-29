@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label header-small" text-center>
+                {{"list_your_garage" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid class="list card animated fadeInRight">
+        <ion-row>
+            <ion-col col-12 text-center>
+                <img class="logo" src="../../assets/imgs/full-logo.png" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div class="clear"></div>
+    <div class="list card animated fadeInLeft">
+        <p *ngIf="global.lang=='en'">{{"list_your_garage1" | translate}}</p>
+        <p *ngIf="global.lang=='ar'" class="arabic-text">{{"list_your_garage1" | translate}}</p>
+        <p *ngIf="global.lang=='en'">{{"list_your_garage2" | translate}}</p>
+        <p *ngIf="global.lang=='en'">{{"list_your_garage3" | translate}}</p>
+        <p *ngIf="global.lang=='ar'" class="arabic-text">{{"list_your_garage3" | translate}}</p>
+    </div>
+    <div class="clear"></div>
+    <ion-grid class="list card animated fadeInRight">
+        <ion-row>
+            <ion-col col-12 text-center>
+                <form [formGroup]="form">
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10 text-center>
+                            <input type="text" placeholder="{{'name' | translate}}" formControlName="name" />
+                        </ion-col>
+                        <div class="validation-errors">
+                            <ng-container *ngFor="let validation of validation_messages.name">
+                                <div class="error-message" *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)">
+                                    {{ validation.message | translate}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10 text-center>
+                            <input type="email" placeholder="{{'email' | translate}}" formControlName="email" />
+                        </ion-col>
+                        <div class="validation-errors">
+                            <ng-container *ngFor="let validation of validation_messages.email">
+                                <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+                                    {{ validation.message | translate}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10 text-center>
+                            <div col-3 class="code">+971</div>
+                            <input class="mobile" col-9 dir="ltr" type="number" maxlength="9" minlength="9" formControlName="mobile" [(ngModel)]="mobile" placeholder="{{'mobile' | translate}}" />
+                        </ion-col>
+                        <div class="validation-errors">
+                            <ng-container *ngFor="let validation of validation_messages.mobile">
+                                <div class="error-message" *ngIf="form.get('mobile').hasError(validation.type) && (form.get('mobile').dirty || form.get('mobile').touched)">
+                                    {{ validation.message | translate}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="!isSent">
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10 text-center>
+                            <input type="button" class="btn-main" value="{{'send' | translate}}" (click)="save()" />
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

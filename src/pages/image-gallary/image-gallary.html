@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"image_gallary" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="viewData.length > 0">
+        <ion-grid class="list card animated fadeInUp">
+            <div *ngFor="let item of viewData">
+                <div class="box" *ngIf="item.image!=null">
+                    <ion-row>
+                        <ion-col size="12" text-center><img src="{{global.imagePath + item.image}}" /></ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="12" text-center>
+                            <input type="button" class="btn-main" value="{{'delete' | translate}}" (click)="deletImage(item.id)" />
+                        </ion-col>
+                    </ion-row>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </ion-grid>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{'more_data' | translate}}">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
+
+<div class="add-btn list card animated fadeIn " (click)="uploadImg() ">
+    <img src="../../assets/imgs/car_add.png " />
+</div>
+
+<div class="select-upload list card animated fadeInUp" *ngIf="showUpload">
+    <div class="select-option">
+        <div (click)="openCamera()">{{"camera" | translate}}</div>
+        <div (click)="openGallery()">{{"gallary" | translate}}</div>
+    </div>
+    <div class="clear"></div>
+    <div class="select-option" (click)="closeUpload()">{{"close" | translate}}</div>
+</div>

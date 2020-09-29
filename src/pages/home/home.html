@@ -1,0 +1,114 @@
+<ion-header>
+    <page-header></page-header>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12>
+                <ion-row>
+                    <ion-col col-6>
+                        <label class="section-title">{{"near_you" | translate}}</label>
+                    </ion-col>
+                    <ion-col col-6 text-right>
+                        <input type="button" class="btn-main btn-small" value="{{'explore_all' | translate}}" (click)="openNearYou()" />
+                    </ion-col>
+                    <ion-col col-12>
+                        <ion-slides slidesPerView="2" centeredSlides="true" spaceBetween="5" initialSlide="1" loop="false" >
+                            <ion-slide class="ion-slide-small" *ngFor="let item of nearYouData">
+                                <div class="border-slide">
+                                    <div class="saved-icon">
+                                        <i class="fas fa-heart red-color" *ngIf="item.saved"></i>
+                                        <i class="fas fa-heart gray-color" *ngIf="!item.saved"></i>
+                                    </div>
+                                    <div (click)="openWorkshopDetails(item.id)">
+                                        <div class="" *ngIf="item.logo!=null">
+                                            <img src="{{global.imagePath}}{{item.logo}}" class="img-slide" class="img-slide" />
+                                        </div>
+                                        <div class="" *ngIf="item.logo==null"><img src="../../assets/imgs/car.png" class="img-slide" /></div>
+                                        <div class="view-name">
+                                            <label *ngIf="global.lang=='ar'" text-left>{{item.ar_name}}</label>
+                                            <label *ngIf="global.lang=='en'" text-left>{{item.en_name}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ion-slide>
+                        </ion-slides>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <div class="clear-mid"></div>
+            <ion-col col-12>
+                <ion-row>
+                    <ion-col col-6>
+                        <label class="section-title">{{"featured" | translate}}</label>
+                    </ion-col>
+                    <ion-col col-6 text-right>
+                        <input type="button" class="btn-main btn-small" value="{{'explore_all' | translate}}" (click)="openFeatred()" />
+                    </ion-col>
+                    <ion-col col-12>
+                        <ion-slides slidesPerView="2" centeredSlides="true" spaceBetween="5" initialSlide="1" loop="false" >
+                            <ion-slide class="ion-slide-small" *ngFor="let item of featuredData">
+                                <div class="border-slide">
+                                    <div class="saved-icon">
+                                        <i class="fas fa-heart red-color" *ngIf="item.saved"></i>
+                                        <i class="fas fa-heart gray-color" *ngIf="!item.saved"></i>
+                                    </div>
+                                    <div class="fearured-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div (click)="openWorkshopDetails(item.id)">
+                                        <div class="" *ngIf="item.logo!=null">
+                                            <img src="{{global.imagePath}}{{item.logo}}" class="img-slide" class="img-slide" />
+                                        </div>
+                                        <div class="" *ngIf="item.logo==null"><img src="../../assets/imgs/car.png" class="img-slide" /></div>
+                                        <div class="view-name">
+                                            <label *ngIf="global.lang=='ar'" text-left>{{item.ar_name}}</label>
+                                            <label *ngIf="global.lang=='en'" text-left>{{item.en_name}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ion-slide>
+                        </ion-slides>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <div class="clear-mid"></div>
+            <ion-col col-12>
+                <ion-row>
+                    <ion-col col-6>
+                        <label class="section-title">{{"latest" | translate}}</label>
+                    </ion-col>
+                    <ion-col col-6 text-right></ion-col>
+                    <ion-col col-12>
+                        <ion-slides slidesPerView="2" centeredSlides="true" spaceBetween="5" initialSlide="1"
+                        loop="false" >
+                            <ion-slide class="ion-slide-small" *ngFor="let item of latestData">
+                                <div class="border-slide">
+                                    <div class="saved-icon">
+                                        <i class="fas fa-heart red-color" *ngIf="item.saved"></i>
+                                        <i class="fas fa-heart gray-color" *ngIf="!item.saved"></i>
+                                    </div>
+                                    <div (click)="openWorkshopDetails(item.id)">
+                                        <div class="" *ngIf="item.logo!=null">
+                                            <img src="{{global.imagePath}}{{item.logo}}" class="img-slide" class="img-slide" />
+                                        </div>
+                                        <div class="" *ngIf="item.logo==null"><img src="../../assets/imgs/car.png" class="img-slide" /></div>
+                                        <div class="view-name">
+                                            <label *ngIf="global.lang=='ar'" text-left>{{item.ar_name}}</label>
+                                            <label *ngIf="global.lang=='en'" text-left>{{item.en_name}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ion-slide>
+                        </ion-slides>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

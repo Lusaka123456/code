@@ -1,0 +1,17 @@
+page-workshop {
+    img {
+        width: auto;
+        height: 270px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    .sort {
+        border: dashed 1px #dc713d !important;
+    }
+    .star {
+        color: #b6b6b6 !important;
+        i {
+            font-size: 20px !important;
+        }
+    }
+}

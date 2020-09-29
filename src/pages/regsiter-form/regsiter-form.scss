@@ -1,0 +1,40 @@
+page-regsiter-form {
+    .register {
+        color: #758692;
+        font-size: 18px;
+    }
+    .register-u {
+        text-decoration: underline;
+    }
+    .border {
+        border: solid 1px #758692;
+        border-radius: 5px;
+        padding: 15px;
+    }
+    .code {
+        background: #f7f8fa;
+        border: solid 1px #cecece;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        line-height: 30px;
+        font-size: 18px;
+        padding-left: 10px;
+        padding-right: 10px;
+        float: left;
+        border-right: none !important;
+    }
+    .mobile {
+        background: #f7f8fa;
+        border: solid 1px #cecece;
+        border-left: none !important;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        line-height: 30px;
+        font-size: 18px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        float: left;
+    }
+}

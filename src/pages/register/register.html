@@ -1,0 +1,16 @@
+<ion-content full-screen>
+    <div class="content">
+        <div class="content-border">
+            <div class="clear-big"></div>
+            <div class="view-reg-type list card animated bounceInLeft" (click)="opneRegsiterForm('customer')">
+                <div class="reg-img"><img src="../../assets/imgs/customer.png"></div>
+                <div class="reg-lable">{{"customer_register" | translate}}</div>
+            </div>
+            <div class="clear-big"></div>
+            <div class="view-reg-type list card animated bounceInRight" (click)="opneRegsiterForm('workshop')">
+                <div class="reg-img"><img src="../../assets/imgs/workshop.png"></div>
+                <div class="reg-lable">{{"workshop_register" | translate}}</div>
+            </div>
+        </div>
+    </div>
+</ion-content>

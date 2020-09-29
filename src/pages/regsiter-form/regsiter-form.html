@@ -1,0 +1,108 @@
+<ion-content>
+    <div class="list card animated flipInX">
+        <div class="clear-big"></div>
+        <div class="very-big-text">{{'register' | translate}}</div>
+        <div class="normal-text">{{'register_to_use' | translate}} {{registerType}}</div>
+        <div class="clear-mid"></div>
+    </div>
+    <form padding [formGroup]="form">
+        <input type="hidden" value="device_token" formControlName="device_token" />
+        <div class="list card animated bounceInLeft">
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="text" placeholder="{{'name' | translate}}" formControlName="name" (keyup.enter)="save()" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.name">
+                        <div class="error-message" *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="email" placeholder="{{'email' | translate}}" formControlName="email" (keyup.enter)="save()" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.email">
+                        <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <div col-3 class="code">+971</div>
+                    <input class="mobile" col-9 dir="ltr" type="number" maxlength="9" minlength="9" formControlName="mobile" [(ngModel)]="mobile" placeholder="{{'mobile' | translate}}" (keyup.enter)="save()" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.mobile">
+                        <div class="error-message" *ngIf="form.get('mobile').hasError(validation.type) && (form.get('mobile').dirty || form.get('mobile').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="password" placeholder="{{'password' | translate}}" formControlName="password" (keyup.enter)="save()" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.password">
+                        <div class="error-message" *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="password" placeholder="{{'confirm_password' | translate}}" formControlName="confirm_password" (keyup.enter)="save()" />
+                </ion-col>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.confirm_password">
+                        <div class="error-message" *ngIf="form.get('confirm_password').hasError(validation.type) && (form.get('confirm_password').dirty || form.get('confirm_password').touched)">
+                            {{ validation.message | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <div class="clear"></div>
+            <ion-row>
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center>
+                    <input type="button" class="btn-main" value="{{'register_now' | translate}}" (click)="save()" />
+                </ion-col>
+                <ion-col col-1></ion-col>
+            </ion-row>
+            <input type="hidden" formControlName="type" />
+            <div class="clear-big"></div>
+        </div>
+        <div class="list card animated bounceInRight">
+            <ion-row class="border">
+                <ion-col col-1></ion-col>
+                <ion-col col-10 text-center (click)="goBack()">
+                    <label class="register">{{'have_account' | translate}}</label><br />
+                    <label class="register register-u">{{'login_account' | translate}}</label>
+                </ion-col>
+                <ion-col col-1></ion-col>
+            </ion-row>
+        </div>
+    </form>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

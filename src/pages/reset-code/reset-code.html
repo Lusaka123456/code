@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-10 text-left class="header-label">
+                {{"forgot_title" | translate}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content padding>
+    <div class="clear-mid"></div>
+    <div text-center>
+        <i class="fas fa-sms very-big-text-60" *ngIf="type=='mobile'"></i>
+        <div class="normal-text" *ngIf="type=='mobile'">{{'valid_mobile' | translate}} {{registerType}}</div>
+
+        <i class="fas fa-envelope very-big-text-60 " *ngIf="type=='email'"></i>
+        <div class="normal-text " *ngIf="type=='email'">{{'valid_email' | translate}} {{registerType}}</div>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-4></ion-col>
+                <ion-col col-4>
+                    <input type="number" [(ngModel)]="code" maxlength="4" minlength="4" max="4" min="4" class="bigInput" />
+                </ion-col>
+                <ion-col col-4></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 text-center>
+                    <input type="button" class="btn-main" value="{{'valid' | translate}}" (click)="checkCode()" />
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

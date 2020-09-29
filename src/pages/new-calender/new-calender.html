@@ -1,0 +1,115 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-8 class="header-label" text-center>
+                {{"calender" | translate}}
+            </ion-col>
+            <ion-col col-2 text-left></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <!-- Change the displayed calendar mode -->
+        <ion-col col-4>
+            <input type="button" class="btn-main btn-full" value="{{'month' | translate}}" (click)="changeMode('month')" />
+        </ion-col>
+        <ion-col col-4>
+            <input type="button" class="btn-main btn-full" value="{{'week' | translate}}" (click)="changeMode('week')" />
+        </ion-col>
+        <ion-col col-4>
+            <input type="button" class="btn-main btn-full" value="{{'day' | translate}}" (click)="changeMode('day')" />
+        </ion-col>
+        <ion-col col-6 text-left>
+            <i class="fas fa-arrow-left" (click)="back()"></i>
+        </ion-col>
+        <ion-col col-6 text-right>
+            <i class="fas fa-arrow-right" (click)="next()"></i>
+        </ion-col>
+    </ion-row>
+
+    <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)" startHour="6" endHour="24" step="30" startingDayWeek="1">
+    </calendar>
+
+    <div class="clear"></div>
+    <div class="clear"></div>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
+
+<div class="full-bg" *ngIf="viewCustomerCard">
+    <div class="faceBox list card animated fadeInUp">
+        <div [ngClass]="{'otherAlign-left': global.lang=='ar', 'otherAlign-right': global.lang=='en'}" (click)="closeFaseBox()"><i class="far fa-times-circle close"></i></div>
+        <div class="clear-mid"></div>
+        <ion-row padding *ngFor="let item of customerCard">
+            <ion-col col-4>
+                <img *ngIf="item.image!=null" class="small-img" src="{{global.imagePath+item.image}}" />
+                <img *ngIf="item.image==null" class="small-img" src="../../assets/imgs/user.png" />
+            </ion-col>
+            <ion-col col-8>
+                <ion-row>
+                    <ion-col col-12>{{item.name}}</ion-col>
+                    <ion-col col-12>
+                        <a href="tel://{{item.mobile}}">{{item.mobile}}</a>
+                    </ion-col>
+                    <ion-col col-12>{{item.email}}</ion-col>
+                </ion-row>
+            </ion-col>
+            <div class="clear-mid"></div>
+            <ion-col col-12 text-center>
+                <input type="button" class="btn-main" value="{{'finish' | translate}}" (click)="finish(item.calenderId)" />
+            </ion-col>
+        </ion-row>
+    </div>
+</div>
+
+<div class="full-bg" *ngIf="fullBG">
+    <div class="faceBox list card animated fadeInUp">
+        <div [ngClass]="{'otherAlign-left': global.lang=='ar', 'otherAlign-right': global.lang=='en'}" (click)="closeFaseBox()"><i class="far fa-times-circle close"></i></div>
+        <ion-grid>
+            <div class="clear-mid"></div>
+            <form padding [formGroup]="form">
+                <ion-row>
+                    <ion-col col-12>{{'what_repaired' | translate}}</ion-col>
+                    <ion-col col-12>
+                        <ion-textarea formControlName="what_repaired"></ion-textarea>
+                    </ion-col>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.what_repaired">
+                            <div class="error-message" *ngIf="form.get('what_repaired').hasError(validation.type) && (form.get('what_repaired').dirty || form.get('what_repaired').touched)">
+                                {{ validation.message | translate}}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-row>
+                <div class="clear"></div>
+                <ion-row>
+                    <ion-col col-12>{{'customer_comment' | translate}}</ion-col>
+                    <ion-col col-12>
+                        <ion-textarea formControlName="customer_comment"></ion-textarea>
+                    </ion-col>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.customer_comment">
+                            <div class="error-message" *ngIf="form.get('customer_comment').hasError(validation.type) && (form.get('customer_comment').dirty || form.get('customer_comment').touched)">
+                                {{ validation.message | translate}}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-row>
+                <div class="clear"></div>
+                <ion-row>
+                    <ion-col col-1></ion-col>
+                    <ion-col col-10 text-center>
+                        <input type="button" class="btn-main" value="{{'save' | translate}}" (click)="save()" />
+                    </ion-col>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+            </form>
+        </ion-grid>
+        <div class="clear-mid"></div>
+    </div>
+</div>

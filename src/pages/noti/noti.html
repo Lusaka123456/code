@@ -1,0 +1,119 @@
+<ion-header>
+    <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+    <div *ngIf="viewData.length > 0">
+        <ion-grid class="list card animated fadeInUp">
+            <div *ngFor="let item of viewData">
+                <ion-row class="full-height" (click)="openNotiDetails(item.id)">
+                    <ion-col col-10>
+                        <div class="noti">
+                            <div class="noti_spot">
+                                <span class="noti_span" *ngIf="item.status=='new'">•</span>
+                            </div>
+                            <div *ngIf="userType=='workshop'">
+                                <p class="noti_word" *ngIf="item.noti_text=='request' && global.lang=='ar'" style="direction: rtl;">يرغب العميل {{item.name}} بحجز موعد لـ {{item.car_name}} ، يُرجى الضغط هنا للقبول أو الرفض</p>
+                                <p class="noti_word" *ngIf="item.noti_text=='request' && global.lang=='en'">{{item.name}} would like to book an appointment for his {{item.car_name}} please click here to accept or reject.</p>
+
+                                <p class="noti_word" *ngIf="item.noti_text=='cancel' && global.lang=='ar'" style="direction: rtl;">رجى العلم ان {{item.car_name}} قد لغى حجزه المفترض في {{item.request_date}} على {{item.request_time}} و ان ذلك قد تم تعديله في الجدول الخاص بك</p>
+                                <p class="noti_word" *ngIf="item.noti_text=='cancel' && global.lang=='en'">Please note that {{item.car_name}} cancelled their appointment on {{item.request_date}} at {{item.request_time}} and it was adjusted on your calendar</p>
+                            </div>
+                            <div *ngIf="userType=='customer' ">
+                                <p *ngIf="item.noti_text=='reject' && global.lang=='en'" class="noti_word" (click)="startNewSearch()">{{item.en_name}} is unable to fulfil your appointment. Please click here to book a new one</p>
+                                <p *ngIf="item.noti_text=='reject' && global.lang=='ar'" class="noti_word" style="direction: rtl;" (click)="startNewSearch()">يعتذر كراج {{item.ar_name}} عن قبول موعدك المقترح. الرجاء الضغط هنا لحجز موعد بديل</p>
+
+                                <p *ngIf="item.noti_text=='accept' && global.lang=='en'" class="noti_word" (click)="goToBooking()">{{item.en_name}} has accepted your appointment for your {{item.car_name}} on {{item.request_date}} at {{item.request_time}}</p>
+                                <p *ngIf="item.noti_text=='accept' && global.lang=='ar'" class="noti_word" (click)="goToBooking()" style="direction: rtl;">تم قبول موعدك مع {{item.ar_name}} لسيارتك {{item.car_name}} في التاريخ {{item.request_date}} الوقت {{item.request_time}}</p>
+
+                                <p *ngIf="item.noti_text=='finish' && item.status=='new' && global.lang=='en'" class="noti_word " (click)="openCommentsRate(item.id) ">{{item.en_name}} finished repairing your {{item.car_name}} car, you can pick it up from the garage now</p>
+                                <p *ngIf="item.noti_text=='finish' && item.status=='new' && global.lang=='ar'" class="noti_word " (click)="openCommentsRate(item.id) ">لقد انتها {{item.ar_name}} من تصليح سيارتك الـ {{item.car_name}} يمكنك الذهاب لإستلامها</p>
+
+                                <p *ngIf="item.noti_text=='finish' && item.status=='old' && global.lang=='en'" class="noti_word ">{{item.en_name}} finished repairing your {{item.car_name}} car, you can pick it up from the garage now</p>
+                                <p *ngIf="item.noti_text=='finish' && item.status=='old' && global.lang=='ar'" class="noti_word ">لقد انتها {{item.ar_name}} من تصليح سيارتك الـ {{item.car_name}} يمكنك الذهاب لإستلامها</p>
+                            </div>
+                        </div>
+                    </ion-col>
+                    <ion-col col-2>
+                        <ion-row class="full-height ">
+                            <p class="noti_time ">{{item.m_noti_date}}</p>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-item-divider class="para_div "></ion-item-divider>
+            </div>
+        </ion-grid>
+    </div>
+
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event) ">
+        <ion-infinite-scroll-content loadingSpinner="bubbles " loadingText="{{ 'more_data' | translate}} ">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
+
+<div class="full-bg " *ngIf="fullBG ">
+    <div *ngIf="rateComments " class="faceBox list card animated fadeInUp ">
+        <div class="scroll-div">
+            <div [ngClass]="{ 'otherAlign-left': global.lang=='ar' , 'otherAlign-right': global.lang=='en' } " (click)="closeFaseBox() "><i class="far fa-times-circle close "></i></div>
+            <ion-row>
+                <ion-col col-12 text-center><label class="big-text ">{{'feedback' | translate}}</label></ion-col>
+            </ion-row>
+            <form padding [formGroup]="form ">
+                <ion-row class="">
+                    <ion-col col-1></ion-col>
+                    <ion-col col-10 text-center>
+                        <textarea class="form-group " placeholder="{{ 'comments' | translate}} " formControlName="comments"></textarea>
+                    </ion-col>
+                    <div class="validation-errors ">
+                        <ng-container *ngFor="let validation of validation_messages.comments">
+                            <div class="error-message " *ngIf="form.get('comments').hasError(validation.type) && (form.get('comments').dirty || form.get('comments').touched) ">
+                                {{ validation.message | translate}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+                <div class="clear "></div>
+                <ion-row>
+                    <ion-col col-1></ion-col>
+                    <ion-col col-10 text-center>
+                        {{ "rate_garage" | translate}}
+                    </ion-col>
+                    <ion-col col-1></ion-col>
+                    <ion-col col-1></ion-col>
+                    <ion-col col-10 text-center>
+                        <i id="star1 " class="fas fa-star " [ngClass]="{'yallow':rateStar>=1}" (click)="setRateValue(1) "></i>
+                        <i id="star2 " class="fas fa-star " [ngClass]="{'yallow':rateStar>=2}" (click)="setRateValue(2) "></i>
+                        <i id="star3 " class="fas fa-star " [ngClass]="{'yallow':rateStar>=3}" (click)="setRateValue(3) "></i>
+                        <i id="star4 " class="fas fa-star " [ngClass]="{'yallow':rateStar>=4}" (click)="setRateValue(4) "></i>
+                        <i id="star5 " class="fas fa-star " [ngClass]="{'yallow':rateStar==5}" (click)="setRateValue(5) "></i>
+                        <input type="hidden" placeholder="{{ 'rate' | translate}} " formControlName="rate" />
+                    </ion-col>
+                    <div class="validation-errors ">
+                        <ng-container *ngFor="let validation of validation_messages.rate ">
+                            <div class="error-message " *ngIf="form.get('rate').hasError(validation.type) && (form.get('rate').dirty || form.get( 'rate').touched) ">
+                                {{ validation.message | translate}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+                <div class="clear "></div>
+                <ion-row>
+                    <ion-col col-1></ion-col>
+                    <ion-col col-10 text-center>
+
+                        <input type="button" (click)="saveRateComments()" class="btn-main" value="{{'save' | translate}}" />
+
+                    </ion-col>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+            </form>
+        </div>
+    </div>
+</div>

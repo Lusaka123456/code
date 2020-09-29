@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2 text-left (click)="goBack()"><i class="fas fa-chevron-left"></i></ion-col>
+            <ion-col col-10 text-left class="header-label">
+                {{"forgot_title" | translate}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content padding>
+    <form padding [formGroup]="form">
+        <div class="clear-mid"></div>
+        <div text-center>
+            <i class="fas fa-envelope very-big-text-60"></i>
+            <div class="normal-text">{{'valid_will_send_email' | translate}} {{registerType}}</div>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-1></ion-col>
+                    <ion-col col-10 text-center>
+                        <input type="email" placeholder="{{'email' | translate}}" formControlName="email" (keyup.enter)="sendCode()" />
+                    </ion-col>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.email">
+                            <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+                                {{ validation.message | translate}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12 text-center>
+                        <input type="button" class="btn-main" value="{{'send' | translate}}" (click)="sendCode()" />
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </form>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>
